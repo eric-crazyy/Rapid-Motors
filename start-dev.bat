@@ -139,12 +139,17 @@ if %ERRORLEVEL% neq 0 (
 goto CHECK_DATABASE
 
 :CHECK_DATABASE
-:: 5. DYNAMIC DATABASE CONNECTION & AUTO-CREATION
 echo Checking database connection...
-php -r "$t=file_get_contents('.env'); preg_match('/^\s*DB_PORT\s*=\s*(.*)/m', $t, $po); preg_match('/^\s*DB_USERNAME\s*=\s*(.*)/m', $t, $us); preg_match('/^\s*DB_PASSWORD\s*=\s*(.*)/m', $t, $pa); preg_match('/^\s*DB_DATABASE\s*=\s*(.*)/m', $t, $da); $port=trim($po[1]??'3306'); $user=trim($us[1]??'root'); $pass=trim($pa[1]??''); $db=trim($da[1]??'laravel'); try { $p = new PDO('mysql:host=127.0.0.1;port='.$port, $user, $pass); $p->exec('CREATE DATABASE IF NOT EXISTS '.$db); echo 'OK'; } catch(Exception $e) { echo 'ERROR'; }" > %TEMP%\dbcheck.txt 2>nul
+
+php -r "$db = 'rapid_motors'; try { $p = new PDO('mysql:host=127.0.0.1;port=%DB_PORT_INPUT%', '%DB_USER_INPUT%', '%DB_PASS_INPUT%'); $p->exec('CREATE DATABASE IF NOT EXISTS '.$db); echo 'OK'; } catch(Exception $e) { echo $e->getMessage(); }" > %TEMP%\dbcheck.txt 2>&1
+
+:: Ellenőrizzük az eredményt
 find "OK" %TEMP%\dbcheck.txt >nul 2>&1
 if %ERRORLEVEL% neq 0 (
-    echo [ERROR] Could not connect to MySQL! Please check your server.
+    echo [ERROR] Connection failed! 
+    echo ------------------------------------------------------------
+    type %TEMP%\dbcheck.txt
+    echo ------------------------------------------------------------
     pause
     exit /b 1
 )
