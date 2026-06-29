@@ -1,6 +1,6 @@
 # Rapid Motors
 
-**Rapid Motors** is a modern, streamlined full-stack web application developed for enthusiasts of luxury and classic cars[cite: 1]. The platform allows users to browse vehicle listings efficiently, access detailed specifications, and view vehicles through interactive 3D models[cite: 1].
+**Rapid Motors** is a modern, streamlined full-stack web application developed for enthusiasts of luxury and classic cars. The platform allows users to browse vehicle listings efficiently, access detailed specifications, and view vehicles through interactive 3D models.
 
 ## 🚀 Key Features
 * **Vehicle Listing Management:** Modern, card-based interface and intuitive data management for the administration panel.
@@ -49,8 +49,8 @@ To launch the project, execute the `start-dev.bat` file located in the root dire
 The project includes comprehensive functional testing via classes located in the Laravel `tests/Feature` directory, which verify authentication processes and CRUD operations.
 
 ## 👥 Developers
-* Erik Nagy[cite: 1]
+* Erik Nagy
 * Milán Kővári
 * Balázs Mátyás Novák
 
-*Developed as a graduation project for the Software Developer and Tester program at Nagykanizsai SZC Zsigmondy Vilmos Technikum (2026)[cite: 1].*
+*Developed as a graduation project for the Software Developer and Tester program at Nagykanizsai SZC Zsigmondy Vilmos Technikum (2026).*
