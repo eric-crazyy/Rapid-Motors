@@ -49,4 +49,4 @@ I made setting up the environment as easy as possible. You don't need to manuall
 ## 🧪 Testing
 The project includes comprehensive functional testing via classes located in the Laravel `tests/Feature` directory, which verify authentication processes and CRUD operations.
 
-*Developed as a graduation project for the Software Developer and Tester program at Nagykanizsai SZC Zsigmondy Vilmos Technikum (2026)*
+*Developed as a graduation project for the Software Developer and Tester program at Nagykanizsai SZC Zsigmondy Vilmos Technikum by Nagy Erik (2026)*
