@@ -27,8 +27,16 @@ goto LOOP_VENDOR
 :RUN_COMPOSER
 echo.
 echo Running composer install... Please wait...
-:: --no-scripts prevents Laravel from freezing at autoload generation before DB/Key exists
-cmd /c composer install --no-scripts
+cmd /c composer install --no-scripts --no-autoloader
+if %ERRORLEVEL% neq 0 (
+    echo Composer install failed.
+    pause
+    exit /b 1
+)
+
+echo.
+echo Generating fast development autoloader...
+cmd /c composer dump-autoload
 echo.
 goto CHECK_FRONTEND
 
@@ -59,7 +67,7 @@ goto LOOP_NODE
 :RUN_NPM
 echo.
 echo Running npm install... Please wait...
-cmd /c npm install
+cmd /c npm install --legacy-peer-deps
 echo.
 goto CHECK_APP_KEY
 
@@ -78,16 +86,16 @@ goto CHECK_DATABASE
 
 
 :CHECK_DATABASE
-:: 4. DATABASE CONNECTION & AUTO-CREATION
-echo Checking database connection...
-php -r "try { $p = new PDO('mysql:host=127.0.0.1;port=3306', 'root', ''); $p->exec('CREATE DATABASE IF NOT EXISTS laravel'); echo 'OK'; } catch(Exception $e) { echo 'ERROR'; }" > %TEMP%\dbcheck.txt 2>nul
+:: 4. DATABASE CONNECTION & AUTO-CREATION (Customized to port 3333 and password: pass)
+echo Checking database connection on port 3333...
+php -r "try { $p = new PDO('mysql:host=127.0.0.1;port=3333', 'root', 'pass'); $p->exec('CREATE DATABASE IF NOT EXISTS rapid_motors'); echo 'OK'; } catch(Exception $e) { echo 'ERROR'; }" > %TEMP%\dbcheck.txt 2>nul
 find "OK" %TEMP%\dbcheck.txt >nul 2>&1
 
 if %ERRORLEVEL% neq 0 (
     echo.
     echo ============================================================
     echo [ERROR] Could not connect to MySQL! 
-    echo Please make sure XAMPP / MySQL is running on port 3306.
+    echo Please make sure XAMPP / MySQL is running on port 3333.
     echo ============================================================
     echo.
     pause
