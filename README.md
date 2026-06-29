@@ -1,4 +1,6 @@
-<img width="6490" height="3286" alt="image" src="https://github.com/user-attachments/assets/70c942a4-dd9a-4424-bc23-573b320f9526" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/70c942a4-dd9a-4424-bc23-573b320f9526" alt="Rapid Motors Mockups" width="100%">
+</p>
 
 # Rapid Motors
 
